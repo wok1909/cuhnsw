@@ -38,8 +38,10 @@ int warp_reduce_cand(const Neighbor* pq, int cand, const bool reverse) {
         cand = _cand;
       } else {
         bool update = reverse? 
-          lt(pq[cand].distance, pq[_cand.distance]): 
-          gt(pq[cand].distance, pq[_cand.distance]);
+          // lt(pq[cand].distance, pq[_cand.distance]): 
+          // gt(pq[cand].distance, pq[_cand.distance]);
+          lt(pq[cand].distance, pq[_cand].distance): 
+          gt(pq[cand].distance, pq[_cand].distance);
         if (update) cand = _cand;
       }
     }

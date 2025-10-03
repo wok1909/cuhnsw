@@ -17,9 +17,9 @@ CuHNSW::CuHNSW() {
   // reference: https://stackoverflow.com/a/32531982
   switch (major_){
     case 2: // Fermi
-      if (minor_ == 1) 
+      if (minor_ == 1)
         cores_ = mp_cnt_ * 48;
-      else 
+      else
         cores_ = mp_cnt_ * 32;
       break;
     case 3: // Kepler
@@ -29,29 +29,29 @@ CuHNSW::CuHNSW() {
       cores_ = mp_cnt_ * 128;
       break;
     case 6: // Pascal
-      if (minor_ == 1 or minor_ == 2) 
+      if (minor_ == 1 or minor_ == 2)
         cores_ = mp_cnt_ * 128;
-      else if (minor_ == 0) 
+      else if (minor_ == 0)
         cores_ = mp_cnt_ * 64;
-      else 
+      else
         DEBUG0("Unknown device type");
       break;
     case 7: // Volta and Turing
-      if (minor_ == 0 or minor_ == 5) 
+      if (minor_ == 0 or minor_ == 5)
         cores_ = mp_cnt_ * 64;
-      else 
+      else
         DEBUG0("Unknown device type");
       break;
     case 8: // Ampere
-      if (minor_ == 0) 
+      if (minor_ == 0)
         cores_ = mp_cnt_ * 64;
-      else if (minor_ == 6) 
+      else if (minor_ == 6)
         cores_ = mp_cnt_ * 128;
-      else 
+      else
         DEBUG0("Unknown device type");
       break;
     default:
-      DEBUG0("Unknown device type"); 
+      DEBUG0("Unknown device type");
       break;
   }
   if (cores_ == -1) cores_ = mp_cnt_ * 128;
@@ -159,9 +159,9 @@ void CuHNSW::SetRandomLevels(const int* levels) {
 void CuHNSW::SaveIndex(std::string fpath) {
   std::ofstream output(fpath);
   DEBUG("save index to {}", fpath);
-  
+
   // write meta values
-  DEBUG0("write meta values"); 
+  DEBUG0("write meta values");
   size_t data_size = num_dims_ * sizeof(scalar);
   size_t max_elements = num_data_;
   size_t cur_element_count = num_data_;
@@ -172,13 +172,13 @@ void CuHNSW::SaveIndex(std::string fpath) {
   size_t size_links_level0 = maxM0 * sizeof(tableint) + sizeof(sizeint);
   size_t size_links_per_element = maxM * sizeof(tableint) + sizeof(sizeint);
   size_t size_data_per_element = size_links_level0 + data_size + sizeof(labeltype);
-  size_t ef_construction = ef_construction_; 
-  double mult = level_mult_; 
+  size_t ef_construction = ef_construction_;
+  double mult = level_mult_;
   size_t offsetData = size_links_level0;
   size_t label_offset = size_links_level0 + data_size;
   size_t offsetLevel0 = 0;
   tableint enterpoint_node = enter_point_;
-  
+
   writeBinaryPOD(output, offsetLevel0);
   writeBinaryPOD(output, max_elements);
   writeBinaryPOD(output, cur_element_count);
@@ -194,7 +194,7 @@ void CuHNSW::SaveIndex(std::string fpath) {
   writeBinaryPOD(output, ef_construction);
 
   // write level0 links and data
-  DEBUG0("write level0 links and data"); 
+  DEBUG0("write level0 links and data");
   char* data_level0_memory = (char*) malloc(cur_element_count * size_data_per_element);
   LevelGraph& graph = level_graphs_[0];
   std::vector<tableint> links;
@@ -204,13 +204,13 @@ void CuHNSW::SaveIndex(std::string fpath) {
     links.clear();
     for (const auto& pr: graph.GetNeighbors(i))
       links.push_back(static_cast<tableint>(pr.second));
-    
+
     sizeint size = links.size();
     memcpy(data_level0_memory + offset, &size, sizeof(sizeint));
     offset += sizeof(sizeint);
     if (size > 0)
       memcpy(data_level0_memory + offset, &links[0], sizeof(tableint) * size);
-    offset += maxM0 * sizeof(tableint); 
+    offset += maxM0 * sizeof(tableint);
     memcpy(data_level0_memory + offset, &data_[i * num_dims_], data_size);
     offset += data_size;
     labeltype label = i;
@@ -218,7 +218,7 @@ void CuHNSW::SaveIndex(std::string fpath) {
     offset += sizeof(labeltype);
   }
   output.write(data_level0_memory, cur_element_count * size_data_per_element);
-  
+
   // write upper layer links
   DEBUG0("write upper layer links");
   for (int i = 0; i < num_data_; ++i) {
@@ -246,16 +246,93 @@ void CuHNSW::SaveIndex(std::string fpath) {
   output.close();
 }
 
+void CuHNSW::SaveIndexAsText(std::string fpath, const int num_queries, const float* qdata, const float* data) {
+  std::ofstream output(fpath);
+  if (!output.is_open()) {
+    std::cerr << "Failed to open file: " << fpath << std::endl;
+    return;
+  }
+  DEBUG("Save index as text to {}", fpath);
+
+  // Save basic info (optional)
+  output << "# num_query:" << num_queries << "\n";
+  output << "# num_data: " << num_data_ << "\n";
+  output << "# num_dims: " << num_dims_ << "\n";
+  output << "# max_level: " << max_level_ << "\n";
+  output << "# max_m: " << max_m_ << ", max_m0: " << max_m0_ << "\n";
+  output << "# visited_list_size: " << visited_list_size_ << "\n";
+  output << "# visited_table_size: " << visited_table_size_ << "\n";
+  output << "# enter_point: " << enter_point_ << "\n";
+  output << "\n";
+
+  // Save query data
+  output << "# Query Data\n";
+  output << "# Query ID, Data\n";
+  for (int i = 0; i < num_queries; ++i) {
+    output << i << ": ";
+    for (int j = 0; j < num_dims_; ++j) {
+      output << qdata[i * num_dims_ + j] << " ";
+    }
+    output << "\n";
+  }
+  output << "\n";
+
+  // Save data
+  output << "# Data\n";
+  output << "# Data ID, Data\n";
+  for (int i = 0; i < num_data_; ++i) {
+    output << i << ": ";
+    for (int j = 0; j < num_dims_; ++j) {
+      output << data[i * num_dims_ + j] << " ";
+    }
+    output << "\n";
+  }
+  output << "\n";
+
+  output << "# Level, Source Node, Neighbor Node, Distance\n";
+
+  // Save level 0 graph
+  LevelGraph& graph = level_graphs_[0];
+  const std::vector<int>& nodes = graph.GetNodes();
+
+  for (auto& node : nodes) {
+    const auto& neighbors = graph.GetNeighbors(node);
+    for (const auto& pr : neighbors) {
+      int neighbor_id = pr.second;
+      float distance = pr.first;
+      output << "0 " << node << " " << neighbor_id << " " << distance << "\n";
+      // (level, source node, neighbor node, distance)
+    }
+  }
+
+  // Save upper levels
+  for (int l = 1; l <= max_level_; ++l) {
+    LevelGraph& upper_graph = level_graphs_[l];
+    const std::vector<int>& upper_nodes = upper_graph.GetNodes();
+    for (auto& node : upper_nodes) {
+      const auto& neighbors = upper_graph.GetNeighbors(node);
+      for (const auto& pr : neighbors) {
+        int neighbor_id = pr.second;
+        float distance = pr.first;
+        output << l << " " << node << " " << neighbor_id << " " << distance << "\n";
+      }
+    }
+  }
+
+  output.close();
+  std::cout << "Index saved as text at: " << fpath << std::endl;
+}
+
 // load graph compatible with hnswlib (https://github.com/nmslib/hnswlib)
 void CuHNSW::LoadIndex(std::string fpath) {
   std::ifstream input(fpath, std::ios::binary);
   DEBUG("load index from {}", fpath);
-  
+
   // reqd meta values
-  DEBUG0("read meta values"); 
+  DEBUG0("read meta values");
   size_t offsetLevel0, max_elements, cur_element_count;
   size_t size_data_per_element, label_offset, offsetData;
-  int maxlevel; 
+  int maxlevel;
   tableint enterpoint_node = enter_point_;
   size_t maxM, maxM0, M;
   double mult;
@@ -288,12 +365,12 @@ void CuHNSW::LoadIndex(std::string fpath) {
 
   char* data_level0_memory = (char*) malloc(max_elements * size_data_per_element);
   input.read(data_level0_memory, cur_element_count * size_data_per_element);
-  
+
   // reset level graphs
   level_graphs_.clear();
   level_graphs_.shrink_to_fit();
   level_graphs_.resize(max_level_ + 1);
-  
+
   // load data and level0 links
   DEBUG0("load level0 links and data");
   DEBUG("level0 count: {}", cur_element_count);
@@ -325,7 +402,7 @@ void CuHNSW::LoadIndex(std::string fpath) {
     offset += sizeof(labeltype);
   }
   SetData(&data[0], num_data_, num_dims_);
-  
+
   // load upper layer links
   DEBUG0("load upper layer links");
   std::vector<std::vector<std::pair<int, int>>> links_data(max_level_ + 1);
@@ -348,7 +425,7 @@ void CuHNSW::LoadIndex(std::string fpath) {
       memcpy(&links[0], buffer + offset, sizeof(tableint) * deg);
       offset += sizeof(tableint) * max_m_;
       for (int k = 0; k < deg; ++k)
-        links_data[j].emplace_back(i, links[k]); 
+        links_data[j].emplace_back(i, links[k]);
     }
   }
 

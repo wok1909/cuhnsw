@@ -10,6 +10,8 @@
 #include "cuda_search_kernels.cuh"
 #include "cuda_build_kernels.cuh"
 
+#include <cstdlib>  // getenv
+
 namespace cuhnsw {
 
 void CuHNSW::GetDeviceInfo() {
@@ -22,12 +24,193 @@ void CuHNSW::GetDeviceInfo() {
   cores_ = -1;
 }
 
+void CuHNSW::store_graph_vec(std::vector<int>& graph_vec, const int max_m0) {
+  std::string memmap_file = "./dumps/graph_vec.txt";
+  std::ofstream memmap(memmap_file);
+
+  printf("Dump file path: %s\n", memmap_file.c_str());
+  if (!memmap.is_open()) {
+    std::cerr << "Error opening file: " << memmap_file << std::endl;
+    return;
+  }
+
+  for (int i = 0; i < graph_vec.size(); ++i) {
+    if (i % max_m0 == 0 && i > 0) {
+      memmap << "\n";
+    }
+    memmap << graph_vec[i] << " ";
+  }
+  memmap << "\n";
+  memmap.close();
+  printf("Dumped!\n");
+}
+
+void CuHNSW::dump_GetEntryPoints_info(const std::vector<int>& entries,
+                                      const std::vector<int>& upper_nodes,
+                                      const std::vector<int>& neighbors,
+                                      const std::vector<int>& deg,
+                                      const std::vector<int>& visited,
+                                      const std::vector<int>& visited_list,
+                                      const std::vector<int64_t>& acc_visited_cnt,
+                                      int num_queries,
+                                      int upper_size,
+                                      int max_m,
+                                      int visited_list_size,
+                                      int level,
+                                      const char* postfix,
+                                      const char* base_dir) {
+  if (base_dir == nullptr)
+    return;
+  std::string memmap_file = std::string(base_dir) + "/GetEntryPoints_" + std::to_string(level) + "_" + postfix + ".txt";
+  // std::string memmap_file = "/home/wok1909/workplace/RAG/ndpxsim/M2NDP-public/examples/benchmarks/hnsw/data/GetEntryPoints_" + std::to_string(level) + "_" + postfix + ".txt";
+  std::ofstream memmap(memmap_file);
+
+  printf("Dump file path: %s\n", memmap_file.c_str());
+  if (!memmap.is_open()) {
+    std::cerr << "Error opening file: " << memmap_file << std::endl;
+    return;
+  }
+
+  // Write to file
+  memmap << "# Graph level: " << level << "\n";
+  // memmap << "# Iternation: " << iteration << "\n\n";
+
+  memmap << "\n# Entry id:\n";
+  for (int i = 0; i < num_queries; i++) {
+    memmap << i << ": " << entries[i] << "\n";
+  }
+
+  memmap << "\n# Upper nodes:\n";
+  for (int i = 0; i < upper_size; i++) {
+    memmap << i << ": " << upper_nodes[i] << "\n";
+  }
+
+  memmap << "\n# Neighbors:\n";
+  for (int i = 0; i < upper_size * max_m; i++) {
+    memmap << i << ": " << neighbors[i] << "\n";
+  }
+
+  memmap << "\n# Degree:\n";
+  for (int i = 0; i < upper_size; i++) {
+    memmap << i << ": " << deg[i] << "\n";
+  }
+
+  memmap << "\n# Visited:\n";
+  for (int i = 0; i < upper_size * num_queries; i++) {
+    memmap << i << ": " << visited[i] << "\n";
+  }
+
+  memmap << "\n# Visited list:\n";
+  for (int i = 0; i < visited_list_size * num_queries; i++) {
+    memmap << i << ": " << visited_list[i] << "\n";
+  }
+
+  memmap << "\n# Accumulate visited count:\n";
+  for (int i = 0; i < num_queries; i++) {
+    memmap << i << ": " << acc_visited_cnt[i] << "\n";
+  }
+
+  memmap.close();
+
+  printf("Dumped!\n");
+}
+
+void CuHNSW::dump_SearchGraph_info(const std::vector<int>& entries,
+                                   const int* nns,
+                                   const float* distances,
+                                   const int* found_cnt,
+                                   const std::vector<int>& visited_table,
+                                   const std::vector<int>& visited_list,
+                                   const std::vector<int64_t>& acc_visited_cnt,
+                                   const std::vector<Neighbor>& neighbors,
+                                   const std::vector<int>& cand_nodes,
+                                   const std::vector<cuda_scalar>& cand_distances,
+                                   int num_queries,
+                                   int topk,
+                                   int visited_table_size,
+                                   int visited_list_size,
+                                   int ef_search,
+                                   const char* postfix,
+                                   const char* base_dir) {
+  if (base_dir == nullptr)
+    return;
+  std::string memmap_file = std::string(base_dir) + "/SearchGraph_" + std::string(postfix) + ".txt";
+  // std::string memmap_file = std::string("/home/wok1909/workplace/RAG/ndpxsim/M2NDP-public/examples/benchmarks/hnsw/data/SearchGraph_") + std::string(postfix) + ".txt";
+  std::ofstream memmap(memmap_file);
+
+  printf("Dump file path: %s\n", memmap_file.c_str());
+  if (!memmap.is_open()) {
+    std::cerr << "Error opening file: " << memmap_file << std::endl;
+    return;
+  }
+
+  // Write to file
+  memmap << "# TopK: " << topk << "\n";
+  memmap << "# Visited table size: " << visited_table_size << "\n";
+  memmap << "# Visited list size: " << visited_list_size << "\n";
+  memmap << "# Epsilon for search: " << ef_search << "\n";
+
+  memmap << "\n# Entries:\n";
+  for (int i = 0; i < num_queries; i++) {
+    memmap << i << ": " << entries[i] << "\n";
+  }
+
+  memmap << "\n# NNS:\n";
+  for (int i = 0; i < num_queries * topk; i++) {
+    memmap << i << ": " << nns[i] << "\n";
+  }
+
+  memmap << "\n# Distances:\n";
+  for (int i = 0; i < num_queries * topk; i++) {
+    memmap << i << ": " << distances[i] << "\n";
+  }
+
+  memmap << "\n# Found count:\n";
+  for (int i = 0; i < num_queries; i++) {
+    memmap << i << ": " << found_cnt[i] << "\n";
+  }
+
+  memmap << "\n# Visited Table:\n";
+  for (int i = 0; i < visited_table_size_ * num_queries; i++) {
+    memmap << i << ": " << visited_table[i] << "\n";
+  }
+
+  memmap << "\n# Visited List:\n";
+  for (int i = 0; i < visited_list_size_ * num_queries; i++) {
+    memmap << i << ": " << visited_list[i] << "\n";
+  }
+
+  memmap << "\n# Accumulate Visited Count:\n";
+  for (int i = 0; i < num_queries; i++) {
+    memmap << i << ": " << acc_visited_cnt[i] << "\n";
+  }
+
+  memmap << "\n# Neighbors (Distance, NodeId, Checked):\n";
+  for (int i = 0; i < ef_search * num_queries; i++) {
+    memmap << i << ": " << neighbors[i].distance << ", " << neighbors[i].nodeid << ", " << neighbors[i].checked << "\n";
+  }
+
+  memmap << "\n# Candidate Nodes:\n";
+  for (int i = 0; i < ef_search * block_cnt_; i++) {
+    memmap << i << ": " << cand_nodes[i] << "\n";
+  }
+
+  memmap << "\n# Candidate Distances:\n";
+  for (int i = 0; i < ef_search * block_cnt_; i++) {
+    memmap << i << ": " << cand_distances[i] << "\n";
+  }
+  memmap.close();
+
+  printf("Dumped!\n");
+}
+
 void CuHNSW::GetEntryPoints(
     const std::vector<int>& nodes,
     std::vector<int>& entries,
-    int level, bool search) {
+    int level, bool search,
+    const char* base_dir) {
   int size = nodes.size();
-  
+
   // process input data for kernel
   LevelGraph& graph = level_graphs_[level];
   const std::vector<int>& upper_nodes = graph.GetNodes();
@@ -43,10 +226,40 @@ void CuHNSW::GetEntryPoints(
     }
   }
   for (int i = 0; i < size; ++i) {
-    int entryid = graph.GetNodeId(entries[i]); 
+    int entryid = graph.GetNodeId(entries[i]);
     entries[i] = entryid;
   }
-  
+
+  if (search) {
+    printf("====== GetEntryPoints %d ======\n", level);
+
+    printf("Qnodes size: %d\n", nodes.size());
+    for (int i = 0; i < size; ++i) {
+      printf("qnodes[%d]: %d\n", i, nodes[i]);
+    }
+    printf("Level %d entry size: %d\n", level, size);
+    for (int i = 0; i < size; ++i) {
+      printf("Start entry[%d]: %d, %d\n", i, entries[i], upper_nodes[entries[i]]);
+    }
+    printf("Level %d upper_nodes (target_node) size: %d\n", level, upper_size);
+    for (int i=0; i<upper_size; i++) {
+      printf("upper_nodes[%d]: %d\n", i, upper_nodes[i]);
+    }
+
+    printf("Level %d neighbors (graph) size: %d\n", level, upper_size * max_m_);
+    for (int i=0; i<upper_size * max_m_; i++) {
+      printf("neighbors[%d]: %d\n", i, neighbors[i]);
+    }
+
+    printf("Level %d degree size: %d\n", level, upper_size);
+    for (int i=0; i<upper_size; i++) {
+      printf("degree[%d]: %d\n", i, deg[i]);
+    }
+
+    printf("Visited list size: %d\n", visited_list_size_);
+  }
+
+
   // copy to gpu mem
   thrust::device_vector<int> dev_nodes(size), dev_entries(size);
   thrust::device_vector<int> dev_upper_nodes(upper_size), dev_deg(upper_size);
@@ -56,11 +269,21 @@ void CuHNSW::GetEntryPoints(
   thrust::copy(upper_nodes.begin(), upper_nodes.end(), dev_upper_nodes.begin());
   thrust::copy(deg.begin(), deg.end(), dev_deg.begin());
   thrust::copy(neighbors.begin(), neighbors.end(), dev_neighbors.begin());
-  
+
   thrust::device_vector<bool> dev_visited(upper_size * block_cnt_, false);
   thrust::device_vector<int> dev_visited_list(visited_list_size_ * block_cnt_);
   thrust::device_vector<int64_t> dev_acc_visited_cnt(block_cnt_, 0);
   thrust::device_vector<cuda_scalar>& qdata = search? device_qdata_: device_data_;
+
+  std::vector<int> visited(upper_size * block_cnt_);
+  std::vector<int> visited_list(visited_list_size_ * block_cnt_);
+  std::vector<int64_t> acc_visited_cnt(block_cnt_);
+  thrust::copy(dev_entries.begin(), dev_entries.end(), entries.begin());
+  thrust::copy(dev_visited.begin(), dev_visited.end(), visited.begin());
+  thrust::copy(dev_visited_list.begin(), dev_visited_list.end(), visited_list.begin());
+  thrust::copy(dev_acc_visited_cnt.begin(), dev_acc_visited_cnt.end(), acc_visited_cnt.begin());
+  if (search)
+    dump_GetEntryPoints_info(entries, upper_nodes, neighbors, deg, visited, visited_list, acc_visited_cnt, size, upper_size, max_m_, visited_list_size_, level, "start", base_dir);
 
   // run kernel
   GetEntryPointsKernel<<<block_cnt_, block_dim_>>>(
@@ -80,17 +303,22 @@ void CuHNSW::GetEntryPoints(
   CHECK_CUDA(cudaDeviceSynchronize());
   // el_[GPU] += sw_[GPU].CheckPoint();
   thrust::copy(dev_entries.begin(), dev_entries.end(), entries.begin());
-  std::vector<int64_t> acc_visited_cnt(block_cnt_);
   thrust::copy(dev_acc_visited_cnt.begin(), dev_acc_visited_cnt.end(), acc_visited_cnt.begin());
   CHECK_CUDA(cudaDeviceSynchronize());
   int64_t full_visited_cnt = std::accumulate(acc_visited_cnt.begin(), acc_visited_cnt.end(), 0);
   DEBUG("full visited cnt: {}", full_visited_cnt);
-  
+
+  thrust::copy(dev_visited.begin(), dev_visited.end(), visited.begin());
+  thrust::copy(dev_visited_list.begin(), dev_visited_list.end(), visited_list.begin());
+  // Write memory map info
+  if (search)
+    dump_GetEntryPoints_info(entries, upper_nodes, neighbors, deg, visited, visited_list, acc_visited_cnt, size, upper_size, max_m_, visited_list_size_, level, "finish", base_dir);
+
   // set output
   for (int i = 0; i < size; ++i) {
+    printf("End entry[%d]: %d, %d\n", i, entries[i], upper_nodes[entries[i]]);
     entries[i] = upper_nodes[entries[i]];
   }
-
 }
 
 void CuHNSW::BuildGraph() {
@@ -128,7 +356,7 @@ void CuHNSW::BuildLevelGraph(int level) {
     if (upper_nodes.count(node)) continue;
     new_nodes.push_back(node);
   }
-  
+
   // initialize entries
   std::vector<int> entries(new_nodes.size(), enter_point_);
 
@@ -207,8 +435,8 @@ void CuHNSW::BuildLevelGraph(int level) {
   }
 }
 
-void CuHNSW::SearchGraph(const float* qdata, const int num_queries, const int topk, const int ef_search, 
-    int* nns, float* distances, int* found_cnt) {
+void CuHNSW::SearchGraph(const float* qdata, const int num_queries, const int topk, const int ef_search,
+    int* nns, float* distances, int* found_cnt,  const char* base_dir) {
   device_qdata_.resize(num_queries * num_dims_);
   #ifdef HALF_PRECISION
     std::vector<cuda_scalar> hdata(num_queries * num_dims_);
@@ -221,8 +449,14 @@ void CuHNSW::SearchGraph(const float* qdata, const int num_queries, const int to
   std::vector<int> qnodes(num_queries);
   std::iota(qnodes.begin(), qnodes.end(), 0);
   std::vector<int> entries(num_queries, enter_point_);
+
+  printf("========== SearchGraph Main ===========\n");
+  printf("Enter point: %d\n", enter_point_);
+
+  // level_graphs_[max_level_].ShowGraph();
+
   for (int l = max_level_; l > 0; --l)
-    GetEntryPoints(qnodes, entries, l, true);
+    GetEntryPoints(qnodes, entries, l, true, base_dir);
   std::vector<int> graph_vec(max_m0_ * num_data_);
   std::vector<int> deg(num_data_);
   LevelGraph graph = level_graphs_[0];
@@ -234,7 +468,33 @@ void CuHNSW::SearchGraph(const float* qdata, const int num_queries, const int to
       graph_vec[offset + j] = neighbors[j].second;
     deg[i] = nbsize;
   }
-  
+
+  // Store graph vec
+  store_graph_vec(graph_vec, max_m0_);
+
+  printf("====== Search Graph ======\n");
+  printf("block_cnt_: %d, block_dim_: %d\n", block_cnt_, block_dim_);
+  printf("ef_search: %d\n", ef_search);
+  printf("num_queries: %d\n", num_queries);
+  printf("num_data_: %d\n", num_data_);
+  printf("num_dims_: %d\n", num_dims_);
+  printf("max_m0_: %d\n", max_m0_);
+  printf("topk: %d\n", topk);
+  printf("visited_table_size_: %d\n", visited_table_size_);
+  printf("visited_list_size_: %d\n", visited_list_size_);
+  printf("neighbors size: %d\n", ef_search * block_cnt_);
+
+  for (int i=0; i<num_queries; i++) {
+    printf("Entries[%d]: %d\n", i, entries[i]);
+  }
+
+  std::vector<int> visited_table(visited_table_size_ * block_cnt_, -1);
+  std::vector<int> visited_list(visited_list_size_ * block_cnt_);
+  std::vector<int64_t> acc_visited_cnt(block_cnt_);
+  std::vector<Neighbor> neighbors(ef_search * block_cnt_);
+  std::vector<int> cand_nodes(ef_search * block_cnt_);
+  std::vector<cuda_scalar> cand_distances(ef_search * block_cnt_);
+
   thrust::device_vector<int> device_graph(max_m0_ * num_data_);
   thrust::device_vector<int> device_deg(num_data_);
   thrust::device_vector<int> device_entries(num_queries);
@@ -251,18 +511,30 @@ void CuHNSW::SearchGraph(const float* qdata, const int num_queries, const int to
   thrust::copy(graph_vec.begin(), graph_vec.end(), device_graph.begin());
   thrust::copy(deg.begin(), deg.end(), device_deg.begin());
   thrust::copy(entries.begin(), entries.end(), device_entries.begin());
+  thrust::copy(device_nns.begin(), device_nns.end(), nns);
+  thrust::copy(device_distances.begin(), device_distances.end(), distances);
+  thrust::copy(device_found_cnt.begin(), device_found_cnt.end(), found_cnt);
+  thrust::copy(device_visited_table.begin(), device_visited_table.end(), visited_table.begin());
+  thrust::copy(device_visited_list.begin(), device_visited_list.end(), visited_list.begin());
+  thrust::copy(device_acc_visited_cnt.begin(), device_acc_visited_cnt.end(), acc_visited_cnt.begin());
+  thrust::copy(device_neighbors.begin(), device_neighbors.end(), neighbors.begin());
+  thrust::copy(device_cand_nodes.begin(), device_cand_nodes.end(), cand_nodes.begin());
+  thrust::copy(device_cand_distances.begin(), device_cand_distances.end(), cand_distances.begin());
+
+  dump_SearchGraph_info(entries, nns, distances, found_cnt, visited_table, visited_list, acc_visited_cnt, neighbors, cand_nodes, cand_distances, num_queries, topk, visited_table_size_, visited_list_size_, ef_search, "start", base_dir);
+
   SearchGraphKernel<<<block_cnt_, block_dim_>>>(
     thrust::raw_pointer_cast(device_qdata_.data()),
     num_queries,
     thrust::raw_pointer_cast(device_data_.data()),
-    num_data_, num_dims_, max_m0_, dist_type_, ef_search, 
+    num_data_, num_dims_, max_m0_, dist_type_, ef_search,
     thrust::raw_pointer_cast(device_entries.data()),
     thrust::raw_pointer_cast(device_graph.data()),
-    thrust::raw_pointer_cast(device_deg.data()), 
+    thrust::raw_pointer_cast(device_deg.data()),
     topk,
-    thrust::raw_pointer_cast(device_nns.data()), 
-    thrust::raw_pointer_cast(device_distances.data()), 
-    thrust::raw_pointer_cast(device_found_cnt.data()), 
+    thrust::raw_pointer_cast(device_nns.data()),
+    thrust::raw_pointer_cast(device_distances.data()),
+    thrust::raw_pointer_cast(device_found_cnt.data()),
     thrust::raw_pointer_cast(device_visited_table.data()),
     thrust::raw_pointer_cast(device_visited_list.data()),
     visited_table_size_, visited_list_size_,
@@ -273,18 +545,25 @@ void CuHNSW::SearchGraph(const float* qdata, const int num_queries, const int to
     thrust::raw_pointer_cast(device_cand_distances.data())
     );
   CHECK_CUDA(cudaDeviceSynchronize());
-  std::vector<int64_t> acc_visited_cnt(block_cnt_);
   thrust::copy(device_acc_visited_cnt.begin(), device_acc_visited_cnt.end(), acc_visited_cnt.begin());
   thrust::copy(device_nns.begin(), device_nns.end(), nns);
   thrust::copy(device_distances.begin(), device_distances.end(), distances);
   thrust::copy(device_found_cnt.begin(), device_found_cnt.end(), found_cnt);
+  thrust::copy(device_visited_table.begin(), device_visited_table.end(), visited_table.begin());
+  thrust::copy(device_visited_list.begin(), device_visited_list.end(), visited_list.begin());
+  thrust::copy(device_neighbors.begin(), device_neighbors.end(), neighbors.begin());
+  thrust::copy(device_cand_nodes.begin(), device_cand_nodes.end(), cand_nodes.begin());
+  thrust::copy(device_cand_distances.begin(), device_cand_distances.end(), cand_distances.begin());
+  dump_SearchGraph_info(entries, nns, distances, found_cnt, visited_table, visited_list, acc_visited_cnt, neighbors, cand_nodes, cand_distances, num_queries, topk, visited_table_size_, visited_list_size_, ef_search, "finish", base_dir);
+
+
   CHECK_CUDA(cudaDeviceSynchronize());
   int64_t full_visited_cnt = std::accumulate(acc_visited_cnt.begin(), acc_visited_cnt.end(), 0LL);
   DEBUG("full number of visited nodes: {}", full_visited_cnt);
   if (labelled_)
     for (int i = 0; i < num_queries * topk; ++i)
       nns[i] = labels_[nns[i]];
-  
+
   device_qdata_.clear();
   device_qdata_.shrink_to_fit();
 }

@@ -73,10 +73,15 @@ class CuHNSW:
   def save_index(self, fpath):
     self.obj.save_index(fpath.encode("utf-8"))
 
+  def save_index_as_text(self, fpath, qdata, data):
+    qdata = qdata.astype(np.float32)
+    data = data.astype(np.float32)
+    self.obj.save_index_as_text(fpath.encode("utf-8"), qdata, data)
+
   def load_index(self, fpath):
     self.obj.load_index(fpath.encode("utf-8"))
 
-  def search_knn(self, qdata, topk, ef_search):
+  def search_knn(self, qdata, topk, ef_search, base_dir=None):
     ef_search = max(topk, ef_search)
     qdata = qdata.astype(np.float32)
     num_queries = qdata.shape[0]
@@ -84,5 +89,5 @@ class CuHNSW:
     distances = np.empty(shape=(num_queries, topk), dtype=np.float32)
     found_cnt = np.empty(shape=(num_queries,), dtype=np.int32)
     self.obj.search_knn(qdata, topk, ef_search,
-                        nns, distances, found_cnt)
+                        nns, distances, found_cnt, base_dir=base_dir)
     return nns, distances, found_cnt

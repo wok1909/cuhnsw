@@ -66,16 +66,27 @@ class CuHNSW {
   void SetRandomLevels(const int* levels);
   void BuildGraph();
   void SaveIndex(std::string fpath);
+  void SaveIndexAsText(std::string fpath, const int num_queries, const float* qdata, const float* data);
   void LoadIndex(std::string fpath);
   void SearchGraph(const float* qdata, const int num_queries, const int topk, const int ef_search,
-    int* nns, float* distances, int* found_cnt);
+    int* nns, float* distances, int* found_cnt, const char* base_dir=nullptr);
+
+  void store_graph_vec(std::vector<int>& graph_vec, const int max_m0);
+  void dump_GetEntryPoints_info(const std::vector<int>& entries, const std::vector<int>& upper_nodes, const std::vector<int>& neighbors, const std::vector<int>& deg,
+                                const std::vector<int>& visited, const std::vector<int>& visited_list, const std::vector<int64_t>& acc_visited_cnt, 
+                                int num_queries, int upper_size, int max_m, int visited_list_size, int level, const char* postfix, const char* base_dir=nullptr);
+  void dump_SearchGraph_info(const std::vector<int>& entries, const int* nns, const float* distances, const int* found_cnt, 
+                             const std::vector<int>& visited_table, const std::vector<int>& visited_list, const std::vector<int64_t>& acc_visited_cnt, 
+                             const std::vector<Neighbor>& neighbors, const std::vector<int>& cand_nodes, const std::vector<cuda_scalar>& cand_distances, 
+                             int num_queries, int topk, int visited_table_size, int visited_list_size, int ef_search, const char* postfix, const char* base_dir = nullptr);
 
  private:
   void GetDeviceInfo();
   void GetEntryPoints(
       const std::vector<int>& nodes,
       std::vector<int>& entries,
-      int level, bool search);
+      int level, bool search,
+      const char* base_dir=nullptr);
   void SearchAtLayer(
       const std::vector<int>& queries,
       std::vector<std::deque<std::pair<float, int>>>& entries,

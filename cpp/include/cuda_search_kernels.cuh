@@ -118,14 +118,26 @@ __global__ void SearchGraphKernel(
       __syncthreads();
       if (threadIdx.x == 0) ef_search_pq[idx].checked = true;
       int entry = ef_search_pq[idx].nodeid;
+      if (threadIdx.x == 0) {
+        // printf("[Query %d] Start searching with pq[%d] (size: %d): nodeid %d, distance %f, degree: %d\n", i, idx, size, ef_search_pq[idx].nodeid, ef_search_pq[idx].distance, deg[entry]);
+        // for (int j = max_m * entry; j < max_m * entry + deg[entry]; ++j)
+        //   printf("[Query %d] Entry: %d, Neighbor %d: %d\n", i, entry, j - max_m * entry, graph[j]);
+      }
       __syncthreads();
 
       for (int j = max_m * entry; j < max_m * entry + deg[entry]; ++j) {
         int dstid = graph[j];
-
+        // if (threadIdx.x == 0)
+        //   printf("[Query %d] Entry: %d, Checking neighbor %d\n", i, entry, dstid);
         if (CheckVisited(_visited_table, _visited_list, visited_cnt, dstid, 
-              visited_table_size, visited_list_size)) 
+              visited_table_size, visited_list_size)) {
+          // if (threadIdx.x == 0)
+          //   printf("[Query %d] Entry: %d, Node %d already visited\n", i, entry, dstid);
           continue;
+        }
+        // if (threadIdx.x == 0)
+        //   printf("[Query %d] Entry: %d, Node %d is not visited\n", i, entry, dstid);
+          
         __syncthreads();
 
         const cuda_scalar* dst_vec = data + num_dims * dstid;
@@ -148,11 +160,12 @@ __global__ void SearchGraphKernel(
     __syncthreads();
     // get sorted neighbors
     if (threadIdx.x == 0) {
+      // printf("[Query %d] Found %d neighbors\n", i, size);
       int size2 = size;
       while (size > 0) {
         cand_nodes[size - 1] = ef_search_pq[0].nodeid;
         cand_distances[size - 1] = ef_search_pq[0].distance;
-        PqPop(ef_search_pq, &size);
+        PqPop(ef_search_pq, &size, i);
       }
       found_cnt[i] = size2 < topk? size2: topk;
       for (int j = 0; j < found_cnt[i]; ++j) {

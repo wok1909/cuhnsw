@@ -47,12 +47,20 @@ class CuHNSWBind {
     obj_.SaveIndex(fpath);
   }
 
+  void SaveIndexAsText(std::string fpath, py::object& qdata, py::object& data) {
+    float_array _qdata(qdata);
+    float_array _data(data);
+    auto buffer = _qdata.request();
+    int num_queries = buffer.ndim == 1? 1: buffer.shape[0];
+    obj_.SaveIndexAsText(fpath, num_queries, _qdata.data(0), _data.data(0));
+  }
+
   void LoadIndex(std::string fpath) {
     obj_.LoadIndex(fpath);
   }
 
   void SearchGraph(py::object& qdata, int topk, int ef_search,
-      py::object& nns, py::object& distances, py::object& found_cnt) {
+      py::object& nns, py::object& distances, py::object& found_cnt, const char* base_dir = nullptr) {
     float_array _qdata(qdata);
     int_array _nns(nns);
     float_array _distances(distances);
@@ -64,7 +72,7 @@ class CuHNSWBind {
 
     int num_queries = buffer.ndim == 1? 1: buffer.shape[0];
     obj_.SearchGraph(_qdata.data(0), num_queries, topk, ef_search,
-        _nns.mutable_data(0), _distances.mutable_data(0), _found_cnt.mutable_data(0));
+        _nns.mutable_data(0), _distances.mutable_data(0), _found_cnt.mutable_data(0), base_dir);
   }
 
  private:
@@ -81,10 +89,11 @@ PYBIND11_PLUGIN(cuhnsw_bind) {
   .def("build_graph", &CuHNSWBind::BuildGraph)
   .def("set_random_levels", &CuHNSWBind::SetRandomLevels, py::arg("levels"))
   .def("save_index", &CuHNSWBind::SaveIndex, py::arg("fpath"))
+  .def("save_index_as_text", &CuHNSWBind::SaveIndexAsText, py::arg("fpath"), py::arg("qdata"), py::arg("data"))
   .def("load_index", &CuHNSWBind::LoadIndex, py::arg("fpath"))
   .def("search_knn", &CuHNSWBind::SearchGraph,
       py::arg("qdata"), py::arg("topk"), py::arg("ef_search"),
-      py::arg("nns"), py::arg("distances"), py::arg("found"))
+      py::arg("nns"), py::arg("distances"), py::arg("found"), py::arg("base_dir"))
   .def("__repr__",
   [](const CuHNSWBind &a) {
     return "<CuHNSWBind>";
