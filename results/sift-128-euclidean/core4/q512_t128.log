@@ -1,0 +1,27 @@
+Query: 512, nThreads: 128, warmup: 4
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 374305333 ns
+Total end-to-end search time: 350440169 ns
+Total end-to-end search time: 362008460 ns
+Total end-to-end search time: 374521969 ns
+Total end-to-end search time: 373761224 ns
+Query: 512, nThreads: 128, warmup: 4
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 375907317 ns
+Total end-to-end search time: 352678836 ns
+Total end-to-end search time: 363767273 ns
+Total end-to-end search time: 379233212 ns
+Total end-to-end search time: 375186074 ns
+Query: 512, nThreads: 128, warmup: 4
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 374363344 ns
+Total end-to-end search time: 355146091 ns
+Total end-to-end search time: 361140752 ns
+Total end-to-end search time: 373925013 ns
+Total end-to-end search time: 372603105 ns

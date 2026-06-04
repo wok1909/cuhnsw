@@ -1,0 +1,21 @@
+Query: 1024, nThreads: 128, warmup: 2
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 203212275 ns
+Total end-to-end search time: 204846626 ns
+Total end-to-end search time: 199835164 ns
+Query: 1024, nThreads: 128, warmup: 2
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 199694545 ns
+Total end-to-end search time: 208426044 ns
+Total end-to-end search time: 199183475 ns
+Query: 1024, nThreads: 128, warmup: 2
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 202218123 ns
+Total end-to-end search time: 202264568 ns
+Total end-to-end search time: 201670787 ns

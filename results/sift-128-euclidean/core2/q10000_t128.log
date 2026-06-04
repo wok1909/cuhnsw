@@ -1,0 +1,18 @@
+Query: 10000, nThreads: 128, warmup: 1
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 3652240894 ns
+Total end-to-end search time: 47 ns
+Query: 10000, nThreads: 128, warmup: 1
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 3649188126 ns
+Total end-to-end search time: 89 ns
+Query: 10000, nThreads: 128, warmup: 1
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 3652646171 ns
+Total end-to-end search time: 47 ns

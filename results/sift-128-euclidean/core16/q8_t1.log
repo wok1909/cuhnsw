@@ -1,0 +1,630 @@
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6654334 ns
+Total end-to-end search time: 6613021 ns
+Total end-to-end search time: 5915742 ns
+Total end-to-end search time: 5624505 ns
+Total end-to-end search time: 5994338 ns
+Total end-to-end search time: 5719557 ns
+Total end-to-end search time: 4831310 ns
+Total end-to-end search time: 4825016 ns
+Total end-to-end search time: 4268468 ns
+Total end-to-end search time: 5506295 ns
+Total end-to-end search time: 5115351 ns
+Total end-to-end search time: 4367991 ns
+Total end-to-end search time: 5058871 ns
+Total end-to-end search time: 4279747 ns
+Total end-to-end search time: 4902212 ns
+Total end-to-end search time: 5580767 ns
+Total end-to-end search time: 5679200 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6772445 ns
+Total end-to-end search time: 6708945 ns
+Total end-to-end search time: 6019121 ns
+Total end-to-end search time: 5723988 ns
+Total end-to-end search time: 6160646 ns
+Total end-to-end search time: 5813766 ns
+Total end-to-end search time: 4936451 ns
+Total end-to-end search time: 4902684 ns
+Total end-to-end search time: 4312860 ns
+Total end-to-end search time: 5586989 ns
+Total end-to-end search time: 5178892 ns
+Total end-to-end search time: 4435606 ns
+Total end-to-end search time: 5125891 ns
+Total end-to-end search time: 4326004 ns
+Total end-to-end search time: 4932271 ns
+Total end-to-end search time: 5653083 ns
+Total end-to-end search time: 5767961 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6745506 ns
+Total end-to-end search time: 6754673 ns
+Total end-to-end search time: 6001138 ns
+Total end-to-end search time: 5719245 ns
+Total end-to-end search time: 6106687 ns
+Total end-to-end search time: 5793838 ns
+Total end-to-end search time: 4936207 ns
+Total end-to-end search time: 4936952 ns
+Total end-to-end search time: 4330945 ns
+Total end-to-end search time: 5587742 ns
+Total end-to-end search time: 5181513 ns
+Total end-to-end search time: 4437194 ns
+Total end-to-end search time: 5146871 ns
+Total end-to-end search time: 4342159 ns
+Total end-to-end search time: 4956979 ns
+Total end-to-end search time: 5634733 ns
+Total end-to-end search time: 5766432 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6901263 ns
+Total end-to-end search time: 6803097 ns
+Total end-to-end search time: 6063524 ns
+Total end-to-end search time: 5765800 ns
+Total end-to-end search time: 6126239 ns
+Total end-to-end search time: 5795898 ns
+Total end-to-end search time: 4910312 ns
+Total end-to-end search time: 4884890 ns
+Total end-to-end search time: 4303251 ns
+Total end-to-end search time: 5604347 ns
+Total end-to-end search time: 5208620 ns
+Total end-to-end search time: 4427481 ns
+Total end-to-end search time: 5140259 ns
+Total end-to-end search time: 4362247 ns
+Total end-to-end search time: 4976526 ns
+Total end-to-end search time: 5667383 ns
+Total end-to-end search time: 5767798 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6736335 ns
+Total end-to-end search time: 6684215 ns
+Total end-to-end search time: 5969484 ns
+Total end-to-end search time: 5695233 ns
+Total end-to-end search time: 6068847 ns
+Total end-to-end search time: 5752739 ns
+Total end-to-end search time: 4846137 ns
+Total end-to-end search time: 4858089 ns
+Total end-to-end search time: 4301823 ns
+Total end-to-end search time: 5536498 ns
+Total end-to-end search time: 5139146 ns
+Total end-to-end search time: 4403968 ns
+Total end-to-end search time: 5108354 ns
+Total end-to-end search time: 4306445 ns
+Total end-to-end search time: 4933340 ns
+Total end-to-end search time: 5635130 ns
+Total end-to-end search time: 5750621 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6679016 ns
+Total end-to-end search time: 6595298 ns
+Total end-to-end search time: 5912736 ns
+Total end-to-end search time: 5626589 ns
+Total end-to-end search time: 5985080 ns
+Total end-to-end search time: 5687997 ns
+Total end-to-end search time: 4807487 ns
+Total end-to-end search time: 4783781 ns
+Total end-to-end search time: 4235473 ns
+Total end-to-end search time: 5476785 ns
+Total end-to-end search time: 5089990 ns
+Total end-to-end search time: 4350482 ns
+Total end-to-end search time: 5043699 ns
+Total end-to-end search time: 4247959 ns
+Total end-to-end search time: 4861214 ns
+Total end-to-end search time: 5541830 ns
+Total end-to-end search time: 5663593 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6682694 ns
+Total end-to-end search time: 6627279 ns
+Total end-to-end search time: 5933034 ns
+Total end-to-end search time: 5661907 ns
+Total end-to-end search time: 6018282 ns
+Total end-to-end search time: 5708874 ns
+Total end-to-end search time: 4819287 ns
+Total end-to-end search time: 4814421 ns
+Total end-to-end search time: 4266175 ns
+Total end-to-end search time: 5521807 ns
+Total end-to-end search time: 5130991 ns
+Total end-to-end search time: 4385764 ns
+Total end-to-end search time: 5062840 ns
+Total end-to-end search time: 4275583 ns
+Total end-to-end search time: 4905091 ns
+Total end-to-end search time: 5613804 ns
+Total end-to-end search time: 5682898 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6732796 ns
+Total end-to-end search time: 6654186 ns
+Total end-to-end search time: 5935516 ns
+Total end-to-end search time: 5662598 ns
+Total end-to-end search time: 6047607 ns
+Total end-to-end search time: 5740984 ns
+Total end-to-end search time: 4852505 ns
+Total end-to-end search time: 4856537 ns
+Total end-to-end search time: 4321031 ns
+Total end-to-end search time: 5565340 ns
+Total end-to-end search time: 5171972 ns
+Total end-to-end search time: 4419495 ns
+Total end-to-end search time: 5123628 ns
+Total end-to-end search time: 4317776 ns
+Total end-to-end search time: 4950215 ns
+Total end-to-end search time: 5612456 ns
+Total end-to-end search time: 5716010 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6639865 ns
+Total end-to-end search time: 6633842 ns
+Total end-to-end search time: 5966464 ns
+Total end-to-end search time: 5683965 ns
+Total end-to-end search time: 6087442 ns
+Total end-to-end search time: 5784297 ns
+Total end-to-end search time: 4880201 ns
+Total end-to-end search time: 4865901 ns
+Total end-to-end search time: 4293982 ns
+Total end-to-end search time: 5541116 ns
+Total end-to-end search time: 5149034 ns
+Total end-to-end search time: 4400554 ns
+Total end-to-end search time: 5072303 ns
+Total end-to-end search time: 4293178 ns
+Total end-to-end search time: 4899037 ns
+Total end-to-end search time: 5580230 ns
+Total end-to-end search time: 5694878 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6800582 ns
+Total end-to-end search time: 6786450 ns
+Total end-to-end search time: 6103252 ns
+Total end-to-end search time: 5830589 ns
+Total end-to-end search time: 6203160 ns
+Total end-to-end search time: 5902039 ns
+Total end-to-end search time: 4995275 ns
+Total end-to-end search time: 4971121 ns
+Total end-to-end search time: 4393236 ns
+Total end-to-end search time: 5693802 ns
+Total end-to-end search time: 5287126 ns
+Total end-to-end search time: 4530525 ns
+Total end-to-end search time: 5244854 ns
+Total end-to-end search time: 4433036 ns
+Total end-to-end search time: 5047339 ns
+Total end-to-end search time: 5717924 ns
+Total end-to-end search time: 5830966 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6711269 ns
+Total end-to-end search time: 6627812 ns
+Total end-to-end search time: 5960285 ns
+Total end-to-end search time: 5674957 ns
+Total end-to-end search time: 6080877 ns
+Total end-to-end search time: 5773912 ns
+Total end-to-end search time: 4889018 ns
+Total end-to-end search time: 4876473 ns
+Total end-to-end search time: 4313837 ns
+Total end-to-end search time: 5587672 ns
+Total end-to-end search time: 5186975 ns
+Total end-to-end search time: 4454209 ns
+Total end-to-end search time: 5146251 ns
+Total end-to-end search time: 4344733 ns
+Total end-to-end search time: 4984558 ns
+Total end-to-end search time: 5685416 ns
+Total end-to-end search time: 5774667 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6739448 ns
+Total end-to-end search time: 6645366 ns
+Total end-to-end search time: 5961038 ns
+Total end-to-end search time: 5710975 ns
+Total end-to-end search time: 6127045 ns
+Total end-to-end search time: 5722501 ns
+Total end-to-end search time: 4824414 ns
+Total end-to-end search time: 4818422 ns
+Total end-to-end search time: 4251261 ns
+Total end-to-end search time: 5504586 ns
+Total end-to-end search time: 5121716 ns
+Total end-to-end search time: 4371517 ns
+Total end-to-end search time: 5078749 ns
+Total end-to-end search time: 4261261 ns
+Total end-to-end search time: 4895081 ns
+Total end-to-end search time: 5563048 ns
+Total end-to-end search time: 5690198 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6728482 ns
+Total end-to-end search time: 6648348 ns
+Total end-to-end search time: 5969145 ns
+Total end-to-end search time: 5670676 ns
+Total end-to-end search time: 6068778 ns
+Total end-to-end search time: 5771890 ns
+Total end-to-end search time: 4847760 ns
+Total end-to-end search time: 4871792 ns
+Total end-to-end search time: 4293242 ns
+Total end-to-end search time: 5557256 ns
+Total end-to-end search time: 5195105 ns
+Total end-to-end search time: 4416921 ns
+Total end-to-end search time: 5116920 ns
+Total end-to-end search time: 4314556 ns
+Total end-to-end search time: 4929505 ns
+Total end-to-end search time: 5645173 ns
+Total end-to-end search time: 5743048 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6805209 ns
+Total end-to-end search time: 6699559 ns
+Total end-to-end search time: 5993839 ns
+Total end-to-end search time: 5716283 ns
+Total end-to-end search time: 6090986 ns
+Total end-to-end search time: 5775708 ns
+Total end-to-end search time: 4883496 ns
+Total end-to-end search time: 4878046 ns
+Total end-to-end search time: 4315950 ns
+Total end-to-end search time: 5567430 ns
+Total end-to-end search time: 5201398 ns
+Total end-to-end search time: 4437052 ns
+Total end-to-end search time: 5129571 ns
+Total end-to-end search time: 4330122 ns
+Total end-to-end search time: 4963669 ns
+Total end-to-end search time: 5651391 ns
+Total end-to-end search time: 5750159 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6628853 ns
+Total end-to-end search time: 6610565 ns
+Total end-to-end search time: 5970798 ns
+Total end-to-end search time: 5678176 ns
+Total end-to-end search time: 6022299 ns
+Total end-to-end search time: 5723137 ns
+Total end-to-end search time: 4841717 ns
+Total end-to-end search time: 4838035 ns
+Total end-to-end search time: 4272615 ns
+Total end-to-end search time: 5511088 ns
+Total end-to-end search time: 5142746 ns
+Total end-to-end search time: 4431595 ns
+Total end-to-end search time: 5133473 ns
+Total end-to-end search time: 4304517 ns
+Total end-to-end search time: 4920318 ns
+Total end-to-end search time: 5609439 ns
+Total end-to-end search time: 5721916 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6751506 ns
+Total end-to-end search time: 6687657 ns
+Total end-to-end search time: 5999727 ns
+Total end-to-end search time: 5711895 ns
+Total end-to-end search time: 6111554 ns
+Total end-to-end search time: 5805608 ns
+Total end-to-end search time: 4885932 ns
+Total end-to-end search time: 4900637 ns
+Total end-to-end search time: 4336422 ns
+Total end-to-end search time: 5612290 ns
+Total end-to-end search time: 5224912 ns
+Total end-to-end search time: 4435706 ns
+Total end-to-end search time: 5130605 ns
+Total end-to-end search time: 4332948 ns
+Total end-to-end search time: 4960002 ns
+Total end-to-end search time: 5664867 ns
+Total end-to-end search time: 5783029 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6671496 ns
+Total end-to-end search time: 6593455 ns
+Total end-to-end search time: 5913357 ns
+Total end-to-end search time: 5627286 ns
+Total end-to-end search time: 6221188 ns
+Total end-to-end search time: 5723208 ns
+Total end-to-end search time: 4846142 ns
+Total end-to-end search time: 4831903 ns
+Total end-to-end search time: 4277996 ns
+Total end-to-end search time: 5523637 ns
+Total end-to-end search time: 5131033 ns
+Total end-to-end search time: 4380028 ns
+Total end-to-end search time: 5074057 ns
+Total end-to-end search time: 4299674 ns
+Total end-to-end search time: 4896425 ns
+Total end-to-end search time: 5591997 ns
+Total end-to-end search time: 5707666 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6639780 ns
+Total end-to-end search time: 6572061 ns
+Total end-to-end search time: 5907367 ns
+Total end-to-end search time: 5622824 ns
+Total end-to-end search time: 6004845 ns
+Total end-to-end search time: 5685465 ns
+Total end-to-end search time: 4813299 ns
+Total end-to-end search time: 4817204 ns
+Total end-to-end search time: 4241329 ns
+Total end-to-end search time: 5452518 ns
+Total end-to-end search time: 5115784 ns
+Total end-to-end search time: 4356574 ns
+Total end-to-end search time: 5061471 ns
+Total end-to-end search time: 4274661 ns
+Total end-to-end search time: 4879188 ns
+Total end-to-end search time: 5568881 ns
+Total end-to-end search time: 5651795 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6648217 ns
+Total end-to-end search time: 6624363 ns
+Total end-to-end search time: 5958204 ns
+Total end-to-end search time: 5678621 ns
+Total end-to-end search time: 6073576 ns
+Total end-to-end search time: 5773545 ns
+Total end-to-end search time: 4845891 ns
+Total end-to-end search time: 4857608 ns
+Total end-to-end search time: 4286270 ns
+Total end-to-end search time: 5535453 ns
+Total end-to-end search time: 5143636 ns
+Total end-to-end search time: 4417308 ns
+Total end-to-end search time: 5130895 ns
+Total end-to-end search time: 4323347 ns
+Total end-to-end search time: 4920622 ns
+Total end-to-end search time: 5562106 ns
+Total end-to-end search time: 5685273 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6745570 ns
+Total end-to-end search time: 6743282 ns
+Total end-to-end search time: 6009476 ns
+Total end-to-end search time: 5736271 ns
+Total end-to-end search time: 6122006 ns
+Total end-to-end search time: 5857268 ns
+Total end-to-end search time: 4924765 ns
+Total end-to-end search time: 4901973 ns
+Total end-to-end search time: 4341654 ns
+Total end-to-end search time: 5621474 ns
+Total end-to-end search time: 5225584 ns
+Total end-to-end search time: 4465960 ns
+Total end-to-end search time: 5156132 ns
+Total end-to-end search time: 4372375 ns
+Total end-to-end search time: 4989105 ns
+Total end-to-end search time: 5682581 ns
+Total end-to-end search time: 5794224 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6618986 ns
+Total end-to-end search time: 6608701 ns
+Total end-to-end search time: 5897081 ns
+Total end-to-end search time: 5647843 ns
+Total end-to-end search time: 6050379 ns
+Total end-to-end search time: 5755721 ns
+Total end-to-end search time: 4857949 ns
+Total end-to-end search time: 4854982 ns
+Total end-to-end search time: 4298976 ns
+Total end-to-end search time: 5560020 ns
+Total end-to-end search time: 5150487 ns
+Total end-to-end search time: 4422968 ns
+Total end-to-end search time: 5101614 ns
+Total end-to-end search time: 4312566 ns
+Total end-to-end search time: 4913286 ns
+Total end-to-end search time: 5617215 ns
+Total end-to-end search time: 5711781 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6695024 ns
+Total end-to-end search time: 6660607 ns
+Total end-to-end search time: 5991572 ns
+Total end-to-end search time: 5691307 ns
+Total end-to-end search time: 6067868 ns
+Total end-to-end search time: 5790819 ns
+Total end-to-end search time: 4888599 ns
+Total end-to-end search time: 4868631 ns
+Total end-to-end search time: 4301059 ns
+Total end-to-end search time: 5564634 ns
+Total end-to-end search time: 5168924 ns
+Total end-to-end search time: 4417862 ns
+Total end-to-end search time: 5128676 ns
+Total end-to-end search time: 4333549 ns
+Total end-to-end search time: 4942176 ns
+Total end-to-end search time: 5630306 ns
+Total end-to-end search time: 5732617 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6639926 ns
+Total end-to-end search time: 6609549 ns
+Total end-to-end search time: 5924753 ns
+Total end-to-end search time: 5687047 ns
+Total end-to-end search time: 6057299 ns
+Total end-to-end search time: 5757514 ns
+Total end-to-end search time: 4862344 ns
+Total end-to-end search time: 4875775 ns
+Total end-to-end search time: 4301075 ns
+Total end-to-end search time: 5552896 ns
+Total end-to-end search time: 5147428 ns
+Total end-to-end search time: 4428512 ns
+Total end-to-end search time: 5127598 ns
+Total end-to-end search time: 4327527 ns
+Total end-to-end search time: 4946572 ns
+Total end-to-end search time: 5620645 ns
+Total end-to-end search time: 5738743 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6891668 ns
+Total end-to-end search time: 6779619 ns
+Total end-to-end search time: 6084181 ns
+Total end-to-end search time: 5784196 ns
+Total end-to-end search time: 6159670 ns
+Total end-to-end search time: 5855965 ns
+Total end-to-end search time: 4934409 ns
+Total end-to-end search time: 4944467 ns
+Total end-to-end search time: 4380555 ns
+Total end-to-end search time: 5659686 ns
+Total end-to-end search time: 5264370 ns
+Total end-to-end search time: 4482240 ns
+Total end-to-end search time: 5193899 ns
+Total end-to-end search time: 4380561 ns
+Total end-to-end search time: 5012666 ns
+Total end-to-end search time: 5718253 ns
+Total end-to-end search time: 5828089 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6846559 ns
+Total end-to-end search time: 6829488 ns
+Total end-to-end search time: 6092090 ns
+Total end-to-end search time: 5780479 ns
+Total end-to-end search time: 6193517 ns
+Total end-to-end search time: 5877369 ns
+Total end-to-end search time: 4931123 ns
+Total end-to-end search time: 4925819 ns
+Total end-to-end search time: 4353331 ns
+Total end-to-end search time: 5632190 ns
+Total end-to-end search time: 5268841 ns
+Total end-to-end search time: 4488522 ns
+Total end-to-end search time: 5217851 ns
+Total end-to-end search time: 4388437 ns
+Total end-to-end search time: 5018703 ns
+Total end-to-end search time: 5731546 ns
+Total end-to-end search time: 5844400 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6721002 ns
+Total end-to-end search time: 6650218 ns
+Total end-to-end search time: 5964558 ns
+Total end-to-end search time: 5696233 ns
+Total end-to-end search time: 6091642 ns
+Total end-to-end search time: 5778658 ns
+Total end-to-end search time: 4871145 ns
+Total end-to-end search time: 4867170 ns
+Total end-to-end search time: 4315210 ns
+Total end-to-end search time: 5586994 ns
+Total end-to-end search time: 5185549 ns
+Total end-to-end search time: 4443496 ns
+Total end-to-end search time: 5117629 ns
+Total end-to-end search time: 4345267 ns
+Total end-to-end search time: 4944421 ns
+Total end-to-end search time: 5636838 ns
+Total end-to-end search time: 5760252 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6668121 ns
+Total end-to-end search time: 6620249 ns
+Total end-to-end search time: 5911842 ns
+Total end-to-end search time: 5649728 ns
+Total end-to-end search time: 6039630 ns
+Total end-to-end search time: 5713018 ns
+Total end-to-end search time: 4819550 ns
+Total end-to-end search time: 4814714 ns
+Total end-to-end search time: 4257045 ns
+Total end-to-end search time: 5510321 ns
+Total end-to-end search time: 5115131 ns
+Total end-to-end search time: 4385013 ns
+Total end-to-end search time: 5067953 ns
+Total end-to-end search time: 4269844 ns
+Total end-to-end search time: 4892552 ns
+Total end-to-end search time: 5588052 ns
+Total end-to-end search time: 5679469 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6846778 ns
+Total end-to-end search time: 6844208 ns
+Total end-to-end search time: 6121734 ns
+Total end-to-end search time: 5818845 ns
+Total end-to-end search time: 6207383 ns
+Total end-to-end search time: 5901974 ns
+Total end-to-end search time: 4961860 ns
+Total end-to-end search time: 4955803 ns
+Total end-to-end search time: 4374424 ns
+Total end-to-end search time: 5640698 ns
+Total end-to-end search time: 5265282 ns
+Total end-to-end search time: 4503086 ns
+Total end-to-end search time: 5208838 ns
+Total end-to-end search time: 4410553 ns
+Total end-to-end search time: 5018850 ns
+Total end-to-end search time: 5728438 ns
+Total end-to-end search time: 5839287 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6726958 ns
+Total end-to-end search time: 6638903 ns
+Total end-to-end search time: 5964654 ns
+Total end-to-end search time: 5698286 ns
+Total end-to-end search time: 6093251 ns
+Total end-to-end search time: 5777046 ns
+Total end-to-end search time: 4883854 ns
+Total end-to-end search time: 4868745 ns
+Total end-to-end search time: 4289433 ns
+Total end-to-end search time: 5545465 ns
+Total end-to-end search time: 5173033 ns
+Total end-to-end search time: 4408353 ns
+Total end-to-end search time: 5119820 ns
+Total end-to-end search time: 4340098 ns
+Total end-to-end search time: 4938687 ns
+Total end-to-end search time: 5624829 ns
+Total end-to-end search time: 5736785 ns
+Query: 8, nThreads: 1, warmup: 16
+====================================================================================================
+(ns)
+Load index... Graph level 5..
+Total end-to-end search time: 6859554 ns
+Total end-to-end search time: 6770076 ns
+Total end-to-end search time: 6050045 ns
+Total end-to-end search time: 5764277 ns
+Total end-to-end search time: 6164580 ns
+Total end-to-end search time: 5845797 ns
+Total end-to-end search time: 4954995 ns
+Total end-to-end search time: 4955037 ns
+Total end-to-end search time: 4384177 ns
+Total end-to-end search time: 5673611 ns
+Total end-to-end search time: 5262646 ns
+Total end-to-end search time: 4484294 ns
+Total end-to-end search time: 5216504 ns
+Total end-to-end search time: 4418495 ns
+Total end-to-end search time: 5015739 ns
+Total end-to-end search time: 5714594 ns
+Total end-to-end search time: 5822077 ns
